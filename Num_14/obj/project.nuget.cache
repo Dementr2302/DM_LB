@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "F5Duuc7LqRisOUlKvdOro1/P0MD1GDceNp+xclAQpygnO7Ua9x2C4QDxGgb4s63/xUiEG/33jdohJQrD1q6n4A==",
+  "success": true,
+  "projectFilePath": "/Users/dmitrijbajramov/Projects/Num_14/Num_14/Num_14.fsproj",
+  "expectedPackageFiles": [
+    "/Users/dmitrijbajramov/.nuget/packages/fsharp.core/5.0.0/fsharp.core.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
