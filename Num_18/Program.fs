@@ -1,7 +1,6 @@
 
 open System
 
-//Метод 1 - найти сумму простых делителей числа 
 let Pro n = 
     let rec Pro1 n div = 
         if div = 1 then true
@@ -23,7 +22,7 @@ let Sum n =
             Sum1 n NextSum newDiv
     Sum1 n 0 n  
 
-//Метод 2 - найти количество нечетных цифр числа, больших 3
+
 let col_vo n = 
     let rec Num n num = 
         if n = 0 then num
@@ -35,7 +34,7 @@ let col_vo n =
             Num NextN nextNum
     Num n 0
 
-//Метод 3 - найти произведение таких делителей числа, сумма цифр которых меньше сумма цифр исходного числа
+
 let Sumn n = 
     let rec Sum1 n init = 
         if n = 0 then init
