@@ -8,7 +8,6 @@ let NumberOfRuschar str =
 
 //18.Найти в тексте даты формата «день.месяц.год».
 
-//из записи 24.03.2003 удаляем точки и преобразуем в строчку типа 24032003
 let Date (str:string)= 
     let day = str.Remove(2,8)
     let month = str.Remove(0,3).Remove(2,5)
