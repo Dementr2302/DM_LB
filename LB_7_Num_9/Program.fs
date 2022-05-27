@@ -1,50 +1,60 @@
-﻿open System
+open System
 
-//1.Дана строка.Необходимо найти общее количество русских символов.
+let rec writelist list=
+    List.iter(fun x->printfn "%O" x) list
 
-let NumberOfRuschar str = 
-    let res1 = String.length(String.filter (fun x -> x>='А' && x<='я') str)
-    Console.WriteLine("Количество русских символов в строке: {0}",res1)
+let numRus str = Convert.ToString(String.length (String.filter (fun x -> x>='А' && x<='я') str))
 
-//18.Найти в тексте даты формата «день.месяц.год».
+let isPalindrom str = 
+    let newStr = String.filter (fun x -> x>='а' && x<='я' || x>='a' && x<='z') str
+    let rec palindrom str =
+        match str with
+        |""-> "Палиндром"
+        |_-> 
+            if str.[0]<>str.[str.Length-1] then "Не палиндром"
+            else 
+                palindrom str.[1..str.Length-2]
+    Convert.ToString(palindrom newStr) 
 
-let Date (str:string)= 
+
+let isDate (str:string)= 
     let day = str.Remove(2,8)
     let month = str.Remove(0,3).Remove(2,5)
     let year = str.Remove(0,6)
+    
     day<="31"&&day>="01" && month>="01"&& month<="12" && year >"0000" && year<"9999"
 
-let FindData (str:string) = 
-    let rec finddate (stroka:string) (strNow: string) (strResult: string) = 
-        match stroka with
-        |"" -> strResult
+let findData (str:string) = 
+    let rec date (strBase:string) (strNow: string) (strList: string) = 
+        match strBase with
+        |"" -> strList
         |_-> 
-            let newStroka = 
+            let newstr = 
                 if strNow.Length<10 then
-                    strNow + stroka.Remove(1,stroka.Length-1)
-                else strNow.Remove(0,1)+(stroka.Remove(1,stroka.Length-1))
-            let newResult = 
-                if (newStroka.Length = 10 && Date newStroka) then strResult+"\n"+newStroka
-                else strResult
-            finddate (stroka.Remove(0,1)) newStroka newResult
-    if finddate str "" "" = "" then "В тексте дат нет" else finddate str "" ""
-    Console.WriteLine("Искомая дата:{0}",finddate str "" "")
+                    strNow + strBase.Remove(1,strBase.Length-1)
+                else strNow.Remove(0,1)+(strBase.Remove(1,strBase.Length-1))
+            let newList = 
+                if (newstr.Length = 10 && isDate newstr) then strList+"\n"+newstr
+                else strList
+            date (strBase.Remove(0,1)) newstr newList
+    if date str "" "" = "" then "Дат нет" else date str "" "" 
+
+let choose = function
+    |1 -> numRus
+    |2 -> isPalindrom
+    |3 -> findData
 
 
-let F1 n str  = 
-    match n with 
-    |1 -> Convert.ToString(NumberOfRuschar str)
-    |3 -> Convert.ToString(FindData str)
-    
-    
 [<EntryPoint>]
 let main argv =
-    Console.WriteLine("Введите строку: ")
+    printfn"Введите строку"
     let str = Console.ReadLine()
-    Console.WriteLine("Введите номер функции:
-     1 - поиск общего количество русских символов 
-     3 - поиск даты определенного формата в тексте
-     ")
-    let n = Console.ReadLine() |> Convert.ToInt32
-    F1 n str  
+    printfn"Выберите:"
+    printfn"1. Общее количество русских символов в строке"
+    printfn"2. Образуют ли строчные символы латиницы палиндром"
+    printfn"3. Найти в тексте даты формата «день.месяц.год»"
+    let func = Console.ReadLine() |>Convert.ToInt32 |> choose
+    str |> func |> printfn "Результат: %O"
+    
+
     0
